@@ -65,11 +65,11 @@ module.exports = function(app) {
   ], (req, res, next) => {
     const { username } = req.body
 
-    const errors = validationResult(req)
+   /* const errors = validationResult(req)
     if (!errors.isEmpty()) {
       const { param, msg: message, } = errors.array()[0]
       return next({ param, message, })
-    }
+    } */
 
     const newUser = new User({ username })
 
