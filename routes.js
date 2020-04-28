@@ -81,8 +81,8 @@ module.exports = function(app) {
         return next(new Error("Unable to process new user request"))
       }
       res.json({
-        success: true,
-        message: `User ${username} successfully added`
+        _id: `${_id}`,
+        username: `${username}`
       })
     })
   })
