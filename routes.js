@@ -59,8 +59,8 @@ module.exports = function(app) {
       .trim()
       .isLength({ min: 3, max: 20 })
       .withMessage('Username must be between 3 and 20 characters, inclusive')
-      .isAlphanumeric()
-      .withMessage('Username must consist of only alphanumeric characters'),
+      .isAlphanumeric(),
+  //    .withMessage('Username must consist of only alphanumeric characters'),
 
   ], (req, res, next) => {
     const { username } = req.body
