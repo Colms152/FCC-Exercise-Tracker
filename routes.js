@@ -52,7 +52,7 @@ module.exports = function(app) {
   ///////////////////////////////////////////////////////////
   // Register New User
   ///////////////////////////////////////////////////////////
-  app.post('/api/new-user', [
+  app.post('/api/exercise/new-user', [
 
     // Username validation
     body('username')
