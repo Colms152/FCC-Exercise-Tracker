@@ -31,7 +31,7 @@ module.exports = function(app) {
   });
 
   // Debug route to view users in DB
-  app.get("/api/users", (req, res, next) => {
+  app.get("/api/exercise/users", (req, res, next) => {
     User.find({})
     .exec((err, users) => {
       if (err) next(new Error(err))
