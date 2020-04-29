@@ -137,7 +137,7 @@ module.exports = function(app) {
           description: description,
           duration: duration,
           _id: data.id,
-          date: date 
+          date: newExercise.date 
         })
       })
     })
