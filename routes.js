@@ -114,11 +114,12 @@ module.exports = function(app) {
     }
 
     
-    const newExercise = {
-      description : description,
-      duration : duration,
-      date: date
-    }
+    var newExercise = [
+      description = description,
+      duration = duration,
+      date = date]
+      
+    
 
     User.findOne({ _id: userId }, function (err, data) {
       if(err) {
