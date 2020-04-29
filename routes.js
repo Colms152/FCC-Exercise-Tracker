@@ -101,8 +101,8 @@ module.exports = function(app) {
 
   ], (req, res, next) => {
     const { userId, description, duration, date } = req.body
-    if (date == ''){
-      date = new Date();
+    if (date === ''){
+      date = new Date(0);
     };
 
 
