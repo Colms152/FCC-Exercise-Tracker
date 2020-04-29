@@ -249,7 +249,7 @@ app.get('/api', [
 //test 2
 app.get('/test', (req, res) => {
 const {username} = req.query
-  userModel
+  User
     .find({username})
     .exec()
     // add HTTPS & www (cybersecurity & performance best practice)
