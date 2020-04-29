@@ -154,31 +154,7 @@ module.exports = function(app) {
 app.get('/api/exercise/log', [
 
   // Exercise validation
-  query('username')
-    .trim()
-    .isLength({ min: 3, max: 20 }).withMessage('Invalid Username')
-    .isAlphanumeric().withMessage('Invalid Username'),
-
-  query('from')
-    .trim()
-    .isISO8601()
-    .withMessage('Invalid date')
-    .isAfter(new Date(0).toJSON())
-    .isBefore(new Date('2999-12-31').toJSON())
-    .withMessage("Invalid Date"),
-
-  query('to')
-    .trim()
-    .isISO8601()
-    .withMessage('Invalid date')
-    .isAfter(new Date(0).toJSON())
-    .isBefore(new Date('2999-12-31').toJSON())
-    .withMessage("Invalid Date"),
-
-  query('limit')
-    .trim()
-    .isNumeric({ no_symbols: true })
-    .withMessage('Invalid Number')
+ 
 ], (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
