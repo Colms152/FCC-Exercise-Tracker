@@ -73,7 +73,15 @@ module.exports = function(app) {
 
     const newUser = new User({ username })
 
-    newUser.save(err => {
+    newUser.save(function(err,room) {
+      res.json({
+        _id: room.id,
+        username: room.username
+      })
+      console.log(room.id);
+   })
+    
+      /*err => {
       if (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
           return next(new Error(`Username '${username}' already taken`))
@@ -86,16 +94,8 @@ module.exports = function(app) {
         username: `${username}`
       }) */
       
-    })
     
-      
-    User
-          .find({ username })
-          .exec()
-          .then(entries => res.json({
-            username: `${entries[0]["username"]}`,
-            _id: `${entries[0]["_id"]}`
-          }))
+    
     
 
 
