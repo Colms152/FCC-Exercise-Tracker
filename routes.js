@@ -101,7 +101,7 @@ module.exports = function(app) {
     
 
   ], (req, res, next) => {
-    const { userId, description, duration, date } = req.body
+    var { userId, description, duration, date } = req.body
     if (date === ''){
       date = new Date(0);
     };
@@ -115,9 +115,9 @@ module.exports = function(app) {
 
     
     const newExercise = [
-      description = description,
-      duration = duration,
-      date = date]
+       description,
+       duration,
+       date]
       
     
 
