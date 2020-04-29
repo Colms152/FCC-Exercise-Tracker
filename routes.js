@@ -101,7 +101,6 @@ module.exports = function(app) {
 
   ], (req, res, next) => {
     const { userId, description, duration, date } = req.body
-    console.log(userId);
     if (date == ''){
       date = new Date();
     };
