@@ -153,12 +153,12 @@ module.exports = function(app) {
 
   */
 app.get('/api/exercise/log', (req, res, next) => {
-  let { userId, from, to, limit } = req.query;
+  var { userId, from, to, limit } = req.query;
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   User.findById(userId).then(user => {
       if (!user) throw new Error('Unknown user with _id');
-      User.find({ userId })
+      exercises.find({ userId })
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
           .then(log => res.status(200).send({
