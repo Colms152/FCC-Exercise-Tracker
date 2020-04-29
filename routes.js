@@ -133,8 +133,14 @@ module.exports = function(app) {
           return next(new Error(`Could not save data`))
         }
         return res.json({
-          success: true,
-          message: `Exercise successfully added`
+          username: data.username,
+          description: data.description,
+          duration: data.duration,
+          _id: data.id,
+          date: data.date 
+          
+          
+          
         })
       })
     })
