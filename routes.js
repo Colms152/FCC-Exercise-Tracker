@@ -138,9 +138,6 @@ module.exports = function(app) {
           duration: data.duration,
           _id: data.id,
           date: data.date 
-          
-          
-          
         })
       })
     })
