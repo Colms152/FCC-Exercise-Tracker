@@ -113,7 +113,7 @@ module.exports = function(app) {
       return next({ param, message, })
     }
 
-    const { userId, description, duration, date } = req.body
+    
     const newExercise = {
       description : description,
       duration : duration,
