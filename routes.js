@@ -246,6 +246,16 @@ app.get('/api', [
       })
 });
 
+//test 2
+app.get('/test', (req, res) => {
+const {username} = req.query
+  userModel
+    .find({username})
+    .exec()
+    // add HTTPS & www (cybersecurity & performance best practice)
+    .then(entries => res.json(`${entries[0]["_id"]}`+ `${entries[0]["username"]}`))
+});
+
   ///////////////////////////////////////////////////////////
   // Default Route Handler
   ///////////////////////////////////////////////////////////
