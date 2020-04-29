@@ -81,11 +81,24 @@ module.exports = function(app) {
         return next(new Error("Unable to process new user request"))
       }
 
-      res.json({
+      /*res.json({
         _id: `${_id}`,
         username: `${username}`
-      })
+      }) */
+
     })
+    
+      
+    User
+          .find({ username })
+          .exec()
+          .then(entries => res.json({
+            username: `${entries[0]["username"]}`,
+            _id: `${entries[0]["_id"]}`
+          }))
+    
+
+
   })
 
   //Route for submitting exercise
@@ -252,7 +265,6 @@ const {username} = req.query
   User
     .find({username})
     .exec()
-    // add HTTPS & www (cybersecurity & performance best practice)
     .then(entries => res.json({
       username: `${entries[0]["username"]}`,
       _id: `${entries[0]["_id"]}`
