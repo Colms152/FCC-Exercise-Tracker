@@ -158,7 +158,7 @@ app.get('/api/exercise/log', (req, res, next) => {
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   User.findById(userId).then(user => {
       if (!user) throw new Error('Unknown user with _id');
-      Exercise.find({ userId })
+      User.find({ userId })
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
           .then(log => res.status(200).send({
