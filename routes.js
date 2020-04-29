@@ -113,19 +113,19 @@ module.exports = function(app) {
       return next({ param, message, })
     }
 
-    const { username, description, duration, date } = req.body
+    const { userId, description, duration, date } = req.body
     const newExercise = {
       description : description,
       duration : duration,
       date: date
     }
 
-    User.findOne({ _id: username }, function (err, data) {
+    User.findOne({ _id: userId }, function (err, data) {
       if(err) {
         return next(new Error(`Something went wrong`))
       }
       if(data === null) {
-        return next(new Error(`Username ${username} not found`))
+        return next(new Error(`Username ${userId} not found`))
       }
 
       data.exercises.push(newExercise)
