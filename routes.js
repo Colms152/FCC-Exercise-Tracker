@@ -81,10 +81,7 @@ module.exports = function(app) {
   app.post('/api/exercise/add', [
 
     // Exercise validation
-    body('username')
-      .trim()
-      .isLength({ min: 3, max: 20 }).withMessage('Invalid Username')
-      .isAlphanumeric().withMessage('Invalid Username'),
+    
 
     body('description')
       .trim()
@@ -123,7 +120,7 @@ module.exports = function(app) {
       date: date
     }
 
-    User.findOne({ username: username }, function (err, data) {
+    User.findOne({ _id: username }, function (err, data) {
       if(err) {
         return next(new Error(`Something went wrong`))
       }
