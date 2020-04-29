@@ -134,10 +134,10 @@ module.exports = function(app) {
         }
         return res.json({
           username: data.username,
-          description: data.description,
-          duration: data.duration,
+          description: description,
+          duration: duration,
           _id: data.id,
-          date: data.date 
+          date: date 
         })
       })
     })
