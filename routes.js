@@ -80,6 +80,7 @@ module.exports = function(app) {
         }
         return next(new Error("Unable to process new user request"))
       }
+
       res.json({
         _id: `${_id}`,
         username: `${username}`
@@ -190,6 +191,38 @@ app.get('/api/exercise/log', [
     .trim()
     .isNumeric({ no_symbols: true })
     .withMessage('Invalid Number')
+], (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    errors.array().forEach(e => {
+      if((e.value !== undefined && e.param !== 'username') || e.param === 'username'){
+        const { param, msg: message, } = errors.array()[0]
+        return next({ param, message, })
+      }
+    })
+  }
+
+  const { username, from = new Date(0), to = new Date(), limit = 100 } = req.query;
+
+  User.aggregate([{ $match: { username }},
+      { $unwind: '$exercises'},
+      { $match: {'exercises.date' : { $gte: new Date(from), $lte: new Date(to)}}},
+      { $limit: Number(limit) }
+    ])
+      .then(doc => {
+        res.json(doc);
+      })
+});
+
+//testing code
+app.get('/api', [
+
+  // Exercise validation
+  query('username')
+    .trim()
+    .isLength({ min: 3, max: 20 }).withMessage('Invalid Username')
+    .isAlphanumeric().withMessage('Invalid Username'),
+
 ], (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
