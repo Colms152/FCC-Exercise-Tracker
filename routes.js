@@ -253,7 +253,11 @@ const {username} = req.query
     .find({username})
     .exec()
     // add HTTPS & www (cybersecurity & performance best practice)
-    .then(entries => res.json(`${entries[0]["_id"]}`+ `${entries[0]["username"]}`))
+    .then(entries => res.json({
+      username: `${entries[0]["username"]}`,
+      _id: `${entries[0]["_id"]}`
+    }
+      ))
 });
 
   ///////////////////////////////////////////////////////////
