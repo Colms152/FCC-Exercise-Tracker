@@ -65,12 +65,7 @@ module.exports = function(app) {
   ], (req, res, next) => {
     const { username } = req.body
     console.log({ username });
-   /* const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      const { param, msg: message, } = errors.array()[0]
-      return next({ param, message, })
-    } */
-
+   
     const newUser = new User({ username })
 
     newUser.save(function(err,room) {
@@ -80,26 +75,7 @@ module.exports = function(app) {
       })
       console.log(room.id);
    })
-    
-      /*err => {
-      if (err) {
-        if (err.name === 'MongoError' && err.code === 11000) {
-          return next(new Error(`Username '${username}' already taken`))
-        }
-        return next(new Error("Unable to process new user request"))
-      }
-
-      /*res.json({
-        _id: `${_id}`,
-        username: `${username}`
-      }) */
-      
-    
-    
-    
-
-
-  })
+  });
 
   //Route for submitting exercise
   app.post('/api/exercise/add', [
