@@ -234,7 +234,7 @@ app.get('/api', [
     })
   }
 
-  const { username, from = new Date(0), to = new Date(), limit = 100 } = req.query;
+  const { username, limit = 1 } = req.query;
 
   User.aggregate([{ $match: { username }},
       { $unwind: '$exercises'},
