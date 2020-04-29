@@ -151,7 +151,33 @@ module.exports = function(app) {
   respond with json info if found
 
   */
-app.get('/api/exercise/log', [
+app.get('/api/exercise/log', (req, res, next) => {
+  let { userId, from, to, limit } = req.query;
+  from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
+  to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
+  User.findById(userId).then(user => {
+      if (!user) throw new Error('Unknown user with _id');
+      Exercise.find({ userId })
+          .where('date').gte(from).lte(to)
+          .limit(+limit).exec()
+          .then(log => res.status(200).send({
+              _id: userId,
+              username: user.username,
+              count: log.length,
+              log: log.map(o => ({
+                  description: o.description,
+                  duration: o.duration,
+                  date: moment(o).format('ddd MMMM DD YYYY')
+              }))
+          }))
+  })
+      .catch(err => {
+          console.log(err);
+          res.status(500).send(err.message);
+      })
+})
+
+/*[
 
   // Exercise validation
  
@@ -176,39 +202,8 @@ app.get('/api/exercise/log', [
       .then(doc => {
         res.json(doc);
       })
-});
+});*/
 
-//testing code
-app.get('/api', [
-
-  // Exercise validation
-  query('username')
-    .trim()
-    .isLength({ min: 3, max: 20 }).withMessage('Invalid Username')
-    .isAlphanumeric().withMessage('Invalid Username'),
-
-], (req, res, next) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    errors.array().forEach(e => {
-      if((e.value !== undefined && e.param !== 'username') || e.param === 'username'){
-        const { param, msg: message, } = errors.array()[0]
-        return next({ param, message, })
-      }
-    })
-  }
-
-  const { username, from = new Date(0), to = new Date(), limit = 1 } = req.query;
-
-  User.aggregate([{ $match: { username }},
-      { $unwind: '$exercises'},
-      { $match: {'exercises.date' : { $gte: new Date(from), $lte: new Date(to)}}},
-      { $limit: Number(limit) }
-    ])
-      .then(doc => {
-        res.json(doc);
-      })
-});
 
 //test 2
 app.get('/test', (req, res) => {
