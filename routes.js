@@ -64,7 +64,7 @@ module.exports = function(app) {
 
   ], (req, res, next) => {
     const { username } = req.body
-
+    console.log({ username });
    /* const errors = validationResult(req)
     if (!errors.isEmpty()) {
       const { param, msg: message, } = errors.array()[0]
@@ -85,7 +85,7 @@ module.exports = function(app) {
         _id: `${_id}`,
         username: `${username}`
       }) */
-
+      
     })
     
       
