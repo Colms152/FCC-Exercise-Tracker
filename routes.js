@@ -103,7 +103,7 @@ module.exports = function(app) {
     const { userId, description, duration, date } = req.body
 
     if (date == ''){
-      'date'= new Date();
+      date = new Date();
     };
 
 
