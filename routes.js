@@ -114,7 +114,7 @@ module.exports = function(app) {
     }
 
     
-    var newExercise = [
+    const newExercise = [
       description = description,
       duration = duration,
       date = date]
