@@ -156,7 +156,34 @@ app.get('/api/exercise/log', (req, res, next) => {
   var { userId, from, to, limit } = req.query;
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
-  User.findById(userId).then(user => {
+  User.findOne({ _id: userId }, function (err, data) {
+    if(err) {
+      return next(new Error(`Something went wrong`))
+    }
+    if(data === null) {
+      return next(new Error(`Username ${userId} not found`))
+    }
+
+    data.exercises.find({ userId })
+    .where('date').gte(from).lte(to)
+    .limit(+limit).exec()
+    .then(log => res.status(200).send({
+        _id: userId,
+        username: user.username,
+        count: log.length,
+        log: log.map(o => ({
+            description: o.description,
+            duration: o.duration,
+            date: moment(o).format('ddd MMMM DD YYYY')
+        }))
+      }))
+
+    
+  })})
+  
+  /*User.findById(userId).then
+  
+  (user => {
       if (!user) throw new Error('Unknown user with _id');
       User.exercises.find({ userId })
           .where('date').gte(from).lte(to)
@@ -171,12 +198,12 @@ app.get('/api/exercise/log', (req, res, next) => {
                   date: moment(o).format('ddd MMMM DD YYYY')
               }))
           }))
-  })
+  })*/
       .catch(err => {
           console.log(err);
           res.status(500).send(err.message);
       })
-})
+
 
 /*[
 
