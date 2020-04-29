@@ -97,15 +97,15 @@ module.exports = function(app) {
       .isNumeric()
       .withMessage('Duration must be a numeric value'),
 
-    body('date')
-      .trim()
-      .isISO8601()
-      .withMessage('Invalid date')
-      .isAfter(new Date(0).toJSON())
-      .isBefore(new Date('2999-12-31').toJSON())
-      .withMessage("Invalid Date"),
+    
 
   ], (req, res, next) => {
+    const { userId, description, duration, date } = req.body
+
+    if (date == ''){
+      'date'= new Date();
+    };
+
 
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
