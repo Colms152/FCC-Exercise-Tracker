@@ -160,18 +160,21 @@ app.get('/api/exercise/log', (req, res, next) => {
     if(err) {
       return next(new Error(`Something went wrong`))
     }
+    //count exercises
     var countnumber = 0;
     for(var prop in data.exercises) {
       console.log(prop);
       if (data.exercises.hasOwnProperty(prop)) {
         countnumber++;
-        // or Object.prototype.hasOwnProperty.call(obj, prop)                
       }
     }
     countnumber = countnumber-33
+    
     res.json({
-      exercises: data.exercises,
-      counter : countnumber 
+      count : countnumber, 
+      log: data.exercises,
+      username : User.username,
+      _id : User._id
     });
       
     })
