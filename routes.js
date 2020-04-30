@@ -164,10 +164,11 @@ app.get('/api/exercise/log', (req, res, next) => {
           .then(log => {
             var counter = 0;
             for(var prop in user.exercises) {
-              counter++;
-              /*if (user.exercises.hasOwnProperty(prop)) {
-              // or Object.prototype.hasOwnProperty.call(obj, prop)                
-              }*/
+              
+              if (user.exercises.hasOwnProperty(prop)) {
+                counter++;
+                // or Object.prototype.hasOwnProperty.call(obj, prop)                
+              }
             }
             res.json({
               Exercise: user.exercises,
