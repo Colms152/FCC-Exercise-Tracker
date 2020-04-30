@@ -161,7 +161,7 @@ app.get('/api/exercise/log', (req, res, next) => {
       User.find({ userId })
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
-          .then(log => res.send(user.exercises)/*status(200).send({
+          .then(log => res.send(user.exercises.length)/*status(200).send({
               _id: userId,
               username: user.username,
               count: log.length,
