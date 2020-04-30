@@ -160,25 +160,29 @@ app.get('/api/exercise/log', (req, res, next) => {
     if(err) {
       return next(new Error(`Something went wrong`))
     }
+    data.where('date').gte(from).lte(to)
+    .limit(+limit).exec()
+    .then(info => {
     //count exercises
     var countnumber = 0;
-    for(var prop in data.exercises) {
+    for(var prop in info.exercises) {
       console.log(prop);
-      if (data.exercises.hasOwnProperty(prop)) {
+      if (info.exercises.hasOwnProperty(prop)) {
         countnumber++;
       }
     }
     countnumber = countnumber-33
     
-    console.log(data.username);
-    console.log(data._id);
+
+
+    //return results
     res.json({
       count : countnumber, 
       log: data.exercises,
-      username : data.username,
-      _id : data._id
+      username : info.username,
+      _id : info._id
     });
-      
+  })
     })
   })
 
