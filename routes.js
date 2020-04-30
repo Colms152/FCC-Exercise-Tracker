@@ -168,8 +168,9 @@ app.get('/api/exercise/log', (req, res, next) => {
         // or Object.prototype.hasOwnProperty.call(obj, prop)                
       }
     }
-    countnumber = countnumber-31
+    countnumber = countnumber-33
     res.json({
+      exercises: data.exercises,
       counter : countnumber 
     });
       
