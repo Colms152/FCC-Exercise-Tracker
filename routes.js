@@ -157,8 +157,12 @@ app.get('/api/exercise/log', (req, res, next) => {
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   
   User.findOne({ _id: userId }, function (err, data) {
-
-    res.send(data.exercises);
+    var countnumber = 0;
+    data.exercises.forEach(countnumber++)
+    
+    res.json({
+      counter : countnumber 
+    });
       
     })
   })
