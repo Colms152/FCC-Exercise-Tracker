@@ -158,7 +158,8 @@ app.get('/api/exercise/log', (req, res, next) => {
   
   User.findOne({ _id: userId }, function (err, data) {
     var countnumber = 0;
-    data.exercises.forEach(countnumber++)
+    var earray = data.exercises;
+    earray.forEach(countnumber++);
     
     res.json({
       counter : countnumber 
