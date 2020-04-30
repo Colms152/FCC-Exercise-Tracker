@@ -157,9 +157,17 @@ app.get('/api/exercise/log', (req, res, next) => {
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   
   User.findOne({ _id: userId }, function (err, data) {
+    if(err) {
+      return next(new Error(`Something went wrong`))
+    }
     var countnumber = 0;
-    var earray = data.exercises;
-    earray.forEach(countnumber++);
+    for(var prop in data.exercises) {
+      
+      if (data.exercises.hasOwnProperty(prop)) {
+        countnumber++;
+        // or Object.prototype.hasOwnProperty.call(obj, prop)                
+      }
+    }
     
     res.json({
       counter : countnumber 
