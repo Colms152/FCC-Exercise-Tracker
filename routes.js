@@ -162,9 +162,9 @@ app.get('/api/exercise/log', (req, res, next) => {
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
           .then(log => {
-            var count = 0;
+            var counter = 0;
             for(var prop in user.exercises) {
-              count++;
+              counter++;
               /*if (user.exercises.hasOwnProperty(prop)) {
               // or Object.prototype.hasOwnProperty.call(obj, prop)                
               }*/
