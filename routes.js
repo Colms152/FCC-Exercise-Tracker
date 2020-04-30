@@ -156,13 +156,41 @@ app.get('/api/exercise/log', (req, res, next) => {
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   
-  User.findOne({ _id: userId }, function (err, data) {
+  User.findOne({ _id: userId })
+      .where('date').gte(from).lte(to)
+      .limit(+limit).exec()
+      then(data =>{
+        if(err) {
+          return next(new Error(`Something went wrong`))
+        }  
+        //count exercises
+        var countnumber = 0;
+        for(var prop in info.exercises) {
+          console.log(prop);
+          if (info.exercises.hasOwnProperty(prop)) {
+            countnumber++;
+          }
+        }
+        countnumber = countnumber-33
+        
+    
+    
+        //return results
+        res.json({
+          count : countnumber, 
+          log: data.exercises,
+          username : info.username,
+          _id : info._id
+        });
+      
+        })
+   //app get close 
+  })
+
+  /* function test(err, data) {
     if(err) {
       return next(new Error(`Something went wrong`))
-    }
-    data.where('date').gte(from).lte(to)
-    .limit(+limit).exec()
-    .then(info => {
+    }  
     //count exercises
     var countnumber = 0;
     for(var prop in info.exercises) {
@@ -182,9 +210,8 @@ app.get('/api/exercise/log', (req, res, next) => {
       username : info.username,
       _id : info._id
     });
-  })
-    })
-  })
+  
+    } */
 
   /*User.findById(userId).then(user => {
       if (!user) throw new Error('Unknown user with _id');
