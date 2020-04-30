@@ -158,10 +158,10 @@ app.get('/api/exercise/log', (req, res, next) => {
   
   User.findById(userId).then(user => {
       if (!user) throw new Error('Unknown user with _id');
-      user.find({ userId })
+      User.find({ userId })
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
-          .then(log => res.status(200).send({
+          .then(log => res.send(log)/*status(200).send({
               _id: userId,
               username: user.username,
               count: log.length,
@@ -170,7 +170,7 @@ app.get('/api/exercise/log', (req, res, next) => {
                   duration: o.duration,
                   date: moment(o).format('ddd MMMM DD YYYY')
               }))
-          }))
+          })*/)
   })
       .catch(err => {
           console.log(err);
