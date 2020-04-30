@@ -170,6 +170,7 @@ app.get('/api/exercise/log', (req, res, next) => {
               }
             }
             res.json({
+              Exercise: user.exercises,
               Amount: count
             })
           }
