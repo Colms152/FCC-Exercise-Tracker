@@ -162,7 +162,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     }
     var countnumber = 0;
     for(var prop in data.exercises) {
-      Console.log(prop);
+      console.log(prop);
       if (data.exercises.hasOwnProperty(prop)) {
         countnumber++;
         // or Object.prototype.hasOwnProperty.call(obj, prop)                
