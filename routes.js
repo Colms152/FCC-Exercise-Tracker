@@ -170,13 +170,13 @@ app.get('/api/exercise/log', (req, res, next) => {
     }
     countnumber = countnumber-33
     
-    console.log(User.username);
-    console.log(User._id);
+    console.log(data.username);
+    console.log(data._id);
     res.json({
       count : countnumber, 
       log: data.exercises,
-      username : User.username,
-      _id : User._id
+      username : data.username,
+      _id : data._id
     });
       
     })
