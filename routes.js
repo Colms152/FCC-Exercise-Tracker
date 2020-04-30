@@ -169,7 +169,9 @@ app.get('/api/exercise/log', (req, res, next) => {
                 count++;
               }
             }
-            res.send(count)
+            res.json({
+              Amount: count
+            })
           }
             /*status(200).send({            
               _id: userId,
