@@ -156,14 +156,21 @@ app.get('/api/exercise/log', (req, res, next) => {
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   
-  User.findById(userId).then(user => {
+  User.findOne({ _id: userId }, function (err, data) {
+
+    res.send(data.exercises);
+      
+    })
+  })
+
+  /*User.findById(userId).then(user => {
       if (!user) throw new Error('Unknown user with _id');
       User.find({ userId })
           .where('date').gte(from).lte(to)
           .limit(+limit).exec()
-          .then(log => {
+          then(log => {
             res.send(log);
-            /*var counter = 0;
+            var counter = 0;
             user.exercises.forEach(counter++);
             for(var prop in user.exercises) {
               counter++;
@@ -174,9 +181,9 @@ app.get('/api/exercise/log', (req, res, next) => {
             res.json({
               Exercise: user.exercises,
               Amount: counter
-            })*/
+            })
           }
-            /*status(200).send({            
+            status(200).send({            
               _id: userId,
               username: user.username,
               count: log.length,
@@ -185,13 +192,13 @@ app.get('/api/exercise/log', (req, res, next) => {
                   duration: o.duration,
                   date: moment(o).format('ddd MMMM DD YYYY')
               }))
-          })*/)
+          }))
   })
       .catch(err => {
           console.log(err);
           res.status(500).send(err.message);
       })
-})
+})*/
 
 /*[
   // Exercise validation
@@ -214,8 +221,8 @@ app.get('/api/exercise/log', (req, res, next) => {
     ])
       .then(doc => {
         res.json(doc);
-      })
-});*/
+      })*/
+
 
 
 //test 2
