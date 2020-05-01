@@ -157,19 +157,22 @@ app.get('/api/exercise/log', (req, res, next) => {
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   console.log("Limited queries:" + limit);
   console.log("Start date:" + from + "End Date:"+ to);
-  User.findOne({ _id: userId })
+  /*User.findOne({ _id: userId })
       .limit(+limit).exec()
       .then(log => res.status(200).send({
         _id: userId,
         username: log.username,
-        count: log.length
-      }))
-/*
+        
+      }))*/
+
   User.findOne({ _id: userId }, function (err, data) {
     if(err) {
       return next(new Error(`Something went wrong`))
     }
     
+    var exercizes = data.exercises.toArray();
+    console.log(exercizes); 
+
     //count exercises
     var countnumber = 0;
     for(var prop in data.exercises) {
@@ -187,7 +190,7 @@ app.get('/api/exercise/log', (req, res, next) => {
       _id : data._id
     });
       
-    }) */
+    }) 
    
    
     //app get close 
