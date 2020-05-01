@@ -176,6 +176,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     var filteredexercises= [];
     test = 1;
     for (i = 0;i < (+limit-1); i++){
+      console.log('Adding To array:' + lexercises[0]);
       filteredexercises.push(lexercises[i]) 
     };
 
