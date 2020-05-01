@@ -174,8 +174,8 @@ app.get('/api/exercise/log', (req, res, next) => {
     var lexercises = data.exercises;
     console.log('Variable values' + lexercises[0]);
     var filteredexercises;
-    
-    for (i = 0;i <= (+limit-1); i++){
+    test = 1;
+    for (i = 0;i <= (+test-1); i++){
       filteredexercises.push(lexercises[i]) 
     };
 
