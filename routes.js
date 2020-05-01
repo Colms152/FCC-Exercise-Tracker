@@ -159,11 +159,7 @@ module.exports = function(app) {
         
       })
       
-      res.json({
-        _id: data.id,
-        username: data.username,
-        log: filteredexercises
-      })
+      res.json(newExercise)
     })
   })
 
