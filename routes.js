@@ -155,6 +155,7 @@ app.get('/api/exercise/log', (req, res, next) => {
   let { userId, from, to, limit } = req.query;
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
+  
   console.log("Limited queries:" + limit);
   console.log("Start date:" + from + "End Date:"+ to);
   /*User.findOne({ _id: userId })
@@ -170,30 +171,46 @@ app.get('/api/exercise/log', (req, res, next) => {
       return next(new Error(`Something went wrong`))
     }
     
+      //count exercises
+      var countnumber = 0;
+      for(var prop in data.exercises) {
+        
+        if (data.exercises.hasOwnProperty(prop)) {
+          countnumber++;
+        }
+      }
+      countnumber = countnumber-33
+
+      console.log("Number" + limit);
+      if (limit == null ){
+        limit = countnumber
+      }
+
     //console.log('Input name' + data.exercises);
     var lexercises = data.exercises;
     console.log('Variable values' + lexercises[0]);
     var filteredexercises= [];
-    test = 1;
-    for (i = 0;i < (+limit-1); i++){
+    
+    
+    //creating array of limited exercises
+    var count=0;
+    for (i = 0; i <= (limit-1); ){
+      console.log(i);
       console.log('Adding To array:' + lexercises[0]);
-      filteredexercises.push(lexercises[i]) 
+      if (lexercises[i] == null){
+        break
+      }
+      filteredexercises.push(lexercises[i])
+      count++
+      i++ 
     };
 
-    //count exercises
-    var countnumber = 0;
-    for(var prop in data.exercises) {
-      
-      if (data.exercises.hasOwnProperty(prop)) {
-        countnumber++;
-      }
-    }
-    countnumber = countnumber-33
+  
     
 //data.exercises,
 
     res.json({
-      count : countnumber, 
+      count : count, 
       log: filteredexercises,
       username : data.username,
       _id : data._id
