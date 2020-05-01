@@ -189,9 +189,11 @@ app.get('/api/exercise/log', (req, res, next) => {
     }
     countnumber = countnumber-33
     
+//data.exercises,
+
     res.json({
       count : countnumber, 
-      log: filteredexercises,//data.exercises,
+      log: filteredexercises,
       username : data.username,
       _id : data._id
     });
