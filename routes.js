@@ -169,7 +169,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     if(err) {
       return next(new Error(`Something went wrong`))
     }
-    
+    /*
     console.log('Input name' + data.exercises);
     var lexercises = data.exercises;
     console.log('Variable values' + lexercises[0]);
@@ -177,7 +177,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     
     for (i = 0;i <= (+limit-1); i++){
       filteredexercises.push(lexercises[i]) 
-    };
+    };*/
 
     //count exercises
     var countnumber = 0;
