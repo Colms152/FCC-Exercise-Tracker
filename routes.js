@@ -158,7 +158,7 @@ app.get('/api/exercise/log', (req, res, next) => {
   console.log("Limited queries:" + limit);
   console.log("Start date:" + from + "End Date:"+ to);
   User.findOne({ _id: userId })
-      //.limit(+limit).exec()
+      .limit(+limit).exec()
       .then(log => res.status(200).send({
         _id: userId,
         username: log.username,
