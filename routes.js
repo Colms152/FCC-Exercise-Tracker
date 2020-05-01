@@ -127,6 +127,27 @@ module.exports = function(app) {
       if(data === null) {
         return next(new Error(`Username ${userId} not found`))
       }
+      
+      //count exercises
+      var countnumber = 0;
+      for(var prop in data.exercises) {
+        
+        if (data.exercises.hasOwnProperty(prop)) {
+          countnumber++;
+        }
+      }
+      countnumber = countnumber-33
+      
+      
+
+      var lexercises = data.exercises;
+      var filteredexercises= [];
+
+      //creating array of newest exercises
+      filteredexercises.push(lexercises[countnumber-1])
+       
+    
+
 
       data.exercises.push(newExercise)
       data.save((err, data) => {
@@ -135,17 +156,25 @@ module.exports = function(app) {
         }
         var dvalue1 = new Date();
         var dvalue2 = newExercise.date
-        return res.json({
+        
+      })
+      
+      res.json({
+        _id: data.id,
+        username: data.username,
+        log: filteredexercises
+      })
+    })
+  })
+
+
+/*return res.json({
           username: data.username,
           description: description,
           duration: duration,
           _id: data.id,
           date: dvalue1.toString() || dvalue2.toString()
-        })
-      })
-    })
-  })
-
+        })*/ 
 
   //newExercise.date || new Date()
   /*route for retrieving user/exercise info
