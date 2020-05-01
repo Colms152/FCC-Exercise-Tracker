@@ -155,9 +155,10 @@ app.get('/api/exercise/log', (req, res, next) => {
   let { userId, from, to, limit } = req.query;
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
-  
+  console.log("Limited queries:" + limit);
+  console.log("Start date:" + from + "End Date:"+ to);
   User.findOne({ _id: userId })
-      .where('date').gte(from).lte(to)
+      //.where('date').gte(from).lte(to)
       .limit(+limit).exec()
       .then(data =>{
         if(err) {
