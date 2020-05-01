@@ -159,7 +159,7 @@ app.get('/api/exercise/log', (req, res, next) => {
   User.findOne({ _id: userId })
       .where('date').gte(from).lte(to)
       .limit(+limit).exec()
-      then(data =>{
+      .then(data =>{
         if(err) {
           return next(new Error(`Something went wrong`))
         }  
