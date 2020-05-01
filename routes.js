@@ -162,10 +162,11 @@ app.get('/api/exercise/log', (req, res, next) => {
     if(err) {
       return next(new Error(`Something went wrong`))
     }
+    data.exercises.limit(+limit).exec()
     //count exercises
     var countnumber = 0;
     for(var prop in data.exercises) {
-      console.log(prop);
+      
       if (data.exercises.hasOwnProperty(prop)) {
         countnumber++;
       }
