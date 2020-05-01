@@ -158,12 +158,11 @@ module.exports = function(app) {
         var dvalue2 = newExercise.date
         
         res.json({
-          _id: userId,
-          username: data.username,
-          exercises:[{description: description,
-          duration: duration,
-          date: date}],
-          __v: data.__v
+          "username": "test",
+          "description": "lol",
+          "duration": 12,
+          "_id": "HkzTLAMyB",
+          "date": "Sat Jun 15 2019"
         })
 
       })
