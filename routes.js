@@ -162,7 +162,8 @@ module.exports = function(app) {
           username: data.username,
           exercises:[{description: description,
           duration: duration,
-          date: date}]
+          date: date}],
+          __v: data.__v
         })
 
       })
