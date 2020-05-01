@@ -157,34 +157,29 @@ app.get('/api/exercise/log', (req, res, next) => {
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   console.log("Limited queries:" + limit);
   console.log("Start date:" + from + "End Date:"+ to);
-  User.findOne({ _id: userId })
-      //.where('date').gte(from).lte(to)
-      .limit(+limit).exec()
-      .then(data =>{
-        if(err) {
-          return next(new Error(`Something went wrong`))
-        }  
-        //count exercises
-        var countnumber = 0;
-        for(var prop in info.exercises) {
-          console.log(prop);
-          if (info.exercises.hasOwnProperty(prop)) {
-            countnumber++;
-          }
-        }
-        countnumber = countnumber-33
-        
+  
+  User.findOne({ _id: userId }, function (err, data) {
+    if(err) {
+      return next(new Error(`Something went wrong`))
+    }
+    //count exercises
+    var countnumber = 0;
+    for(var prop in data.exercises) {
+      console.log(prop);
+      if (data.exercises.hasOwnProperty(prop)) {
+        countnumber++;
+      }
+    }
+    countnumber = countnumber-33
     
-    
-        //return results
-        res.json({
-          count : countnumber, 
-          log: data.exercises,
-          username : info.username,
-          _id : info._id
-        });
+    res.json({
+      count : countnumber, 
+      log: data.exercises,
+      username : User.username,
+      _id : User._id
+    });
       
-        })
+    })
    //app get close 
   })
 
