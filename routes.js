@@ -172,7 +172,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     
     console.log('Input name' + data.exercises);
     var lexercises = data.exercises;
-    console.log('Variable values' + lexercises);
+    console.log('Variable values' + lexercises[0]);
 
     //count exercises
     var countnumber = 0;
