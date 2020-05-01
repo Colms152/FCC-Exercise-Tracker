@@ -170,7 +170,7 @@ app.get('/api/exercise/log', (req, res, next) => {
       return next(new Error(`Something went wrong`))
     }
     
-    console.log('Input name' + data.username);
+    console.log('Input name' + data.exercises);
 
     //count exercises
     var countnumber = 0;
