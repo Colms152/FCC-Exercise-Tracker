@@ -157,9 +157,18 @@ module.exports = function(app) {
         var dvalue1 = new Date();
         var dvalue2 = newExercise.date
         
+        res.json({
+          _id: userId,
+          description: description,
+          duration: duration,
+          date: date,
+          username: data.username
+  
+        })
+
       })
       
-      res.json(newExercise)
+      
     })
   })
 
