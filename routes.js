@@ -173,6 +173,11 @@ app.get('/api/exercise/log', (req, res, next) => {
     console.log('Input name' + data.exercises);
     var lexercises = data.exercises;
     console.log('Variable values' + lexercises[0]);
+    var filteredexercises;
+    
+    for (i = 0;i <= (limit-1);){
+      filteredexercises.push(lexercises[i]) 
+    };
 
     //count exercises
     var countnumber = 0;
@@ -186,7 +191,7 @@ app.get('/api/exercise/log', (req, res, next) => {
     
     res.json({
       count : countnumber, 
-      log: data.exercises,
+      log: filteredexercises,//data.exercises,
       username : data.username,
       _id : data._id
     });
