@@ -133,17 +133,21 @@ module.exports = function(app) {
         if (err) {
           return next(new Error(`Could not save data`))
         }
+        var dvalue1 = new Date();
+        var dvalue2 = newExercise.date
         return res.json({
           username: data.username,
           description: description,
           duration: duration,
           _id: data.id,
-          date: newExercise.date || new Date()
+          date: dvalue1.toString() || dvalue2.toString()
         })
       })
     })
   })
 
+
+  //newExercise.date || new Date()
   /*route for retrieving user/exercise info
     GET /exercise/log?{userId}[&from][&to][&limit]
   .get - req, res =>
@@ -156,6 +160,8 @@ app.get('/api/exercise/log', (req, res, next) => {
   from = moment(from, 'YYYY-MM-DD').isValid() ? moment(from, 'YYYY-MM-DD') : 0;
   to = moment(to, 'YYYY-MM-DD').isValid() ? moment(to, 'YYYY-MM-DD') : moment().add(1000000000000);
   
+  
+
   console.log("Limited queries:" + limit);
   console.log("Start date:" + from + "End Date:"+ to);
   /*User.findOne({ _id: userId })
