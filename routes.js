@@ -170,7 +170,7 @@ app.get('/api/exercise/log', (req, res, next) => {
       return next(new Error(`Something went wrong`))
     }
     
-    var exercizes = data.exercises.toArray();
+    var exercizes = data.exercises;
     console.log(exercizes); 
 
     //count exercises
