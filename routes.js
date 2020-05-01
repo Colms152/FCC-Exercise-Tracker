@@ -159,11 +159,10 @@ module.exports = function(app) {
         
         res.json({
           _id: userId,
-          description: description,
+          username: data.username,
+          exercises:[{description: description,
           duration: duration,
-          date: date,
-          username: data.username
-  
+          date: date}]
         })
 
       })
